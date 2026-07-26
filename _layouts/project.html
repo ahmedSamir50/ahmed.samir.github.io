@@ -15,7 +15,16 @@ layout: default
     <!-- Project Header -->
     <div class="section-fade mb-16">
       <div class="flex flex-col sm:flex-row items-center gap-10 mb-10 text-center sm:text-left">
-        {% if page.company_logo %}
+        {% if page.project_logo %}
+          <div class="flex flex-col items-center gap-3">
+            <div class="w-32 h-32 rounded-2xl flex items-center justify-center shadow-xl transition-all duration-300 bg-navy-800/40 border border-white/10 p-5 backdrop-blur-md">
+              <img src="{{ page.project_logo | relative_url }}" alt="{{ page.title }}"
+                {% if page.nuget_package %}data-nuget-icon="{{ page.nuget_package }}"{% endif %}
+                class="max-w-full max-h-full object-contain" />
+            </div>
+            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-cyan-400 font-bold">Open Source</span>
+          </div>
+        {% elsif page.company_logo %}
           <div class="flex flex-col items-center gap-3">
             <div class="w-32 h-32 rounded-2xl flex items-center justify-center shadow-xl transition-all duration-300
               {% if page.company_logo_theme == 'white' %}

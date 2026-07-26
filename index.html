@@ -109,7 +109,9 @@ layout: default
           <span class="text-slate-200">Kafka, RabbitMQ, and Hangfire</span>.
         </p>
         <p>A <span class="text-cyan-400 font-semibold">Product-Minded Engineer</span> focused on maximizing
-          user-facing impact and strategic business value.</p>
+          user-facing impact and strategic business value. Author of
+          <a href="{{ '/projects/zvec-net/' | relative_url }}" class="text-cyan-400 hover:text-cyan-300 font-semibold underline underline-offset-2 decoration-cyan-500/40">ZVec.NET</a>
+          — the first production .NET SDK for Alibaba’s in-process vector database.</p>
         <div class="pt-2">
           <p class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-3">Languages</p>
           <div class="flex flex-wrap gap-2">
@@ -674,6 +676,9 @@ layout: default
       <button onclick="filterProjects('digital-transformation')"
         class="project-filter-btn px-6 py-2 rounded-full border border-white/10 text-slate-400 hover:text-white hover:border-blue-500/50 transition-all text-sm"
         data-filter="digital-transformation">Digital Transformation</button>
+      <button onclick="filterProjects('open-source')"
+        class="project-filter-btn px-6 py-2 rounded-full border border-white/10 text-slate-400 hover:text-white hover:border-blue-500/50 transition-all text-sm"
+        data-filter="open-source">Open Source</button>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" id="projects-grid">
@@ -684,7 +689,13 @@ layout: default
         class="project-card flex flex-col section-fade group p-6 rounded-2xl bg-navy-900 border border-white/10 hover:border-{{ project.gradient_from }}/30 transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-{{ project.gradient_from }}/10 {% if forloop.index > 3 %}hidden-initially{% endif %}">
         <div class="flex items-start justify-between mb-4">
           <div class="flex relative group-hover:-translate-y-1 transition-transform">
-            {% if project.company_logo %}
+            {% if project.project_logo %}
+              <div class="w-14 h-14 rounded-2xl bg-navy-800/60 border border-white/10 p-2 flex items-center justify-center shadow-xl backdrop-blur-sm z-10 transition-all hover:bg-white/5">
+                <img src="{{ project.project_logo | relative_url }}" alt="{{ project.title }}"
+                  {% if project.nuget_package %}data-nuget-icon="{{ project.nuget_package }}"{% endif %}
+                  class="max-w-full max-h-full object-contain opacity-95" />
+              </div>
+            {% elsif project.company_logo %}
               <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 p-3 flex items-center justify-center shadow-xl backdrop-blur-sm z-10 transition-all hover:bg-white/10">
                 <img src="{{ project.company_logo | relative_url }}" alt="Consulting Company Logo" class="max-w-full max-h-full logo-light object-contain opacity-90" />
               </div>
@@ -695,7 +706,12 @@ layout: default
             {% endif %}
           </div>
           <div class="flex flex-col items-end gap-2 text-right">
-            {% if project.categories contains 'gov-enterprise' %}
+            {% if project.categories contains 'open-source' %}
+            <span
+              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] font-bold uppercase tracking-tight whitespace-nowrap">
+              <i data-lucide="git-branch" class="w-3 h-3"></i> Open Source
+            </span>
+            {% elsif project.categories contains 'gov-enterprise' %}
             <span
               class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[9px] font-bold uppercase tracking-tight whitespace-nowrap">
               <i data-lucide="building-2" class="w-3 h-3"></i> Gov / Enterprise
@@ -713,6 +729,14 @@ layout: default
         </div>
         <h3 class="text-lg font-bold text-slate-100 mb-2">{{ project.title }}</h3>
         <p class="text-sm text-slate-400 leading-relaxed flex-1">{{ project.description }}</p>
+        {% if project.nuget_package %}
+        <div class="mt-4 inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-mono"
+          data-nuget-package="{{ project.nuget_package }}" hidden>
+          <i data-lucide="download" class="w-3 h-3"></i>
+          <span data-nuget-count>—</span>
+          <span class="text-cyan-500/80 uppercase tracking-wider text-[10px]">downloads</span>
+        </div>
+        {% endif %}
         <div class="mt-5 flex flex-wrap gap-2">
           {% for t in project.tech %}
           <span class="tech-tag">{{ t }}</span>
