@@ -1,7 +1,7 @@
 # Jekyll Configuration
 title: "Ahmed Samir | Portfolio"
 email: "ahmed.samir.abdelaal@gmail.com"
-description: "Lead Full Stack Engineer (.NET | Angular | Mobile Hybrid). 9+ years delivering mission-critical enterprise systems for GCC/MENA markets."
+description: "Lead Full Stack Engineer (.NET | Angular | Mobile Hybrid). 8+ years delivering mission-critical enterprise systems for GCC/MENA markets."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://ahmedsamir50.github.io" # the base hostname & protocol for your site
 

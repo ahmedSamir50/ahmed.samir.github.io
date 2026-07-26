@@ -110,10 +110,9 @@ function calculateYearsOfExperience() {
     years--;
     months += 12;
   }
-  if (months > 5) {
-    years++;
-  }
-  
+  // Floor completed years only. HTML suffix is "+", meaning "more than N"
+  // (never round up — that would read as e.g. 9+ = more than nine).
+
   const expValueElements = document.querySelectorAll('.years-exp-value');
   expValueElements.forEach(el => {
     el.setAttribute('data-target', years);
